@@ -6,6 +6,7 @@ authors = ["Rishat2 <114484896+Rishat2@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+coverage = "^7.6.1"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.2.7"
