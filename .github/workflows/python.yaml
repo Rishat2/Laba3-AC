@@ -11,14 +11,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: "3.10.0"
-        env:
-          AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
 
       - name: Install dependencies
         run: |
@@ -30,8 +28,6 @@ jobs:
         run: |
           poetry run coverage run -m pytest .
           poetry run coverage report -m
-        env:
-          CI: true
           
   lint:
     runs-on: ubuntu-20.04
