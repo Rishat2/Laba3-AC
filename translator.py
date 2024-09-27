@@ -27,6 +27,7 @@ def clean_code(code: str):
     lines = filter(bool, lines)
     return "\n".join(lines)
 
+
 # flake8: noqa: C901
 def translate_section_data(section_data: str):
     global address
