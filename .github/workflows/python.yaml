@@ -25,6 +25,13 @@ jobs:
           python3 -m pip install --upgrade pip
           pip3 install poetry
           poetry install
+
+      - name: Run tests and collect coverage
+        run: |
+          poetry run coverage run -m pytest .
+          poetry run coverage report -m
+        env:
+          CI: true
           
   lint:
     runs-on: ubuntu-20.04
