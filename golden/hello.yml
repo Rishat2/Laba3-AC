@@ -1,0 +1,923 @@
+in_source: |
+  section .data:
+    hello: "Hello world!"
+    pointer: hello
+    length: 0
+  section .text:
+        lit pointer
+        push
+        push
+        lit length
+        pop
+        lit pointer
+        dup
+        push
+        inc
+        switch
+        pop
+    .loop:
+        lit length
+        push
+        lit 0
+        cmp
+        jz .stop
+        drop
+        dec
+        lit length
+        pop
+        lit pointer
+        push
+        push
+        lit out
+        pop
+        lit pointer
+        dup
+        push
+        inc
+        switch
+        pop
+        jmp .loop
+    .stop:
+        halt
+in_stdin: |-
+  []
+out_code: |-
+  [
+  {"value": 18},
+   {"value": 0},
+   {"value": 0},
+   {"value": 12},
+   {"value": 72},
+   {"value": 101},
+   {"value": 108},
+   {"value": 108},
+   {"value": 111},
+   {"value": 32},
+   {"value": 119},
+   {"value": 111},
+   {"value": 114},
+   {"value": 108},
+   {"value": 100},
+   {"value": 33},
+   {"value": 3},
+   {"value": 0},
+   {"opcode": "lit", "operand": 16},
+   {"opcode": "push", "operand": null},
+   {"opcode": "push", "operand": null},
+   {"opcode": "lit", "operand": 17},
+   {"opcode": "pop", "operand": null},
+   {"opcode": "lit", "operand": 16},
+   {"opcode": "dup", "operand": null},
+   {"opcode": "push", "operand": null},
+   {"opcode": "inc", "operand": null},
+   {"opcode": "switch", "operand": null},
+   {"opcode": "pop", "operand": null},
+   {"opcode": "lit", "operand": 17},
+   {"opcode": "push", "operand": null},
+   {"opcode": "lit", "operand": 0},
+   {"opcode": "cmp", "operand": null},
+   {"opcode": "jz", "operand": 50},
+   {"opcode": "drop", "operand": null},
+   {"opcode": "dec", "operand": null},
+   {"opcode": "lit", "operand": 17},
+   {"opcode": "pop", "operand": null},
+   {"opcode": "lit", "operand": 16},
+   {"opcode": "push", "operand": null},
+   {"opcode": "push", "operand": null},
+   {"opcode": "lit", "operand": 2},
+   {"opcode": "pop", "operand": null},
+   {"opcode": "lit", "operand": 16},
+   {"opcode": "dup", "operand": null},
+   {"opcode": "push", "operand": null},
+   {"opcode": "inc", "operand": null},
+   {"opcode": "switch", "operand": null},
+   {"opcode": "pop", "operand": null},
+   {"opcode": "jmp", "operand": 29},
+   {"opcode": "halt", "operand": null}
+  ]
+out_stdout: |
+  source LoC: 40 code instr: 51
+  ============================================================
+  Hello world!
+
+  instr_counter: 268 ticks: 1348
+out_log: |
+  DEBUG   machine:execute_lit   TICK: 6          PC: 19         TDS1: 16         TDS2: 0          TAS: 0          Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 12         PC: 20         TDS1: 3          TDS2: 0          TAS: 20         Z_FLAG: 0       push
+           DATA_STACK: [3]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 18         PC: 21         TDS1: 12         TDS2: 0          TAS: 21         Z_FLAG: 0       push
+           DATA_STACK: [12]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 22         PC: 22         TDS1: 17         TDS2: 0          TAS: 21         Z_FLAG: 0       lit 17
+           DATA_STACK: [12, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 29         PC: 23         TDS1: 17         TDS2: 12         TAS: 23         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 33         PC: 24         TDS1: 16         TDS2: 12         TAS: 23         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 38         PC: 25         TDS1: 16         TDS2: 12         TAS: 23         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 44         PC: 26         TDS1: 3          TDS2: 12         TAS: 26         Z_FLAG: 0       push
+           DATA_STACK: [16, 3]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 49         PC: 27         TDS1: 4          TDS2: 12         TAS: 26         Z_FLAG: 0       inc
+           DATA_STACK: [16, 4]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 55         PC: 28         TDS1: 4          TDS2: 16         TAS: 26         Z_FLAG: 0       switch
+           DATA_STACK: [4, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 62         PC: 29         TDS1: 16         TDS2: 4          TAS: 29         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 66         PC: 30         TDS1: 17         TDS2: 4          TAS: 29         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 72         PC: 31         TDS1: 12         TDS2: 4          TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [12]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 76         PC: 32         TDS1: 0          TDS2: 4          TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [12, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 82         PC: 33         TDS1: 0          TDS2: 12         TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [12, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 84         PC: 34         TDS1: 0          TDS2: 12         TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [12, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 87         PC: 35         TDS1: 0          TDS2: 12         TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [12]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 92         PC: 36         TDS1: 11         TDS2: 12         TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [11]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 96         PC: 37         TDS1: 17         TDS2: 12         TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [11, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 103        PC: 38         TDS1: 17         TDS2: 11         TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 107        PC: 39         TDS1: 16         TDS2: 11         TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 113        PC: 40         TDS1: 4          TDS2: 11         TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [4]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 119        PC: 41         TDS1: 72         TDS2: 11         TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [72]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 123        PC: 42         TDS1: 2          TDS2: 11         TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [72, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: '' << 'H'
+  DEBUG   machine:execute_pop   TICK: 130        PC: 43         TDS1: 2          TDS2: 72         TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 134        PC: 44         TDS1: 16         TDS2: 72         TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 139        PC: 45         TDS1: 16         TDS2: 72         TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 145        PC: 46         TDS1: 4          TDS2: 72         TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 4]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 150        PC: 47         TDS1: 5          TDS2: 72         TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 5]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 156        PC: 48         TDS1: 5          TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [5, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 163        PC: 49         TDS1: 16         TDS2: 5          TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 167        PC: 29         TDS1: 29         TDS2: 5          TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 171        PC: 30         TDS1: 17         TDS2: 5          TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 177        PC: 31         TDS1: 11         TDS2: 5          TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [11]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 181        PC: 32         TDS1: 0          TDS2: 5          TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [11, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 187        PC: 33         TDS1: 0          TDS2: 11         TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [11, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 189        PC: 34         TDS1: 0          TDS2: 11         TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [11, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 192        PC: 35         TDS1: 0          TDS2: 11         TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [11]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 197        PC: 36         TDS1: 10         TDS2: 11         TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [10]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 201        PC: 37         TDS1: 17         TDS2: 11         TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [10, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 208        PC: 38         TDS1: 17         TDS2: 10         TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 212        PC: 39         TDS1: 16         TDS2: 10         TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 218        PC: 40         TDS1: 5          TDS2: 10         TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [5]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 224        PC: 41         TDS1: 101        TDS2: 10         TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [101]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 228        PC: 42         TDS1: 2          TDS2: 10         TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [101, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'H' << 'e'
+  DEBUG   machine:execute_pop   TICK: 235        PC: 43         TDS1: 2          TDS2: 101        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 239        PC: 44         TDS1: 16         TDS2: 101        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 244        PC: 45         TDS1: 16         TDS2: 101        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 250        PC: 46         TDS1: 5          TDS2: 101        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 5]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 255        PC: 47         TDS1: 6          TDS2: 101        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 6]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 261        PC: 48         TDS1: 6          TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [6, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 268        PC: 49         TDS1: 16         TDS2: 6          TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 272        PC: 29         TDS1: 29         TDS2: 6          TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 276        PC: 30         TDS1: 17         TDS2: 6          TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 282        PC: 31         TDS1: 10         TDS2: 6          TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [10]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 286        PC: 32         TDS1: 0          TDS2: 6          TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [10, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 292        PC: 33         TDS1: 0          TDS2: 10         TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [10, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 294        PC: 34         TDS1: 0          TDS2: 10         TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [10, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 297        PC: 35         TDS1: 0          TDS2: 10         TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [10]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 302        PC: 36         TDS1: 9          TDS2: 10         TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [9]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 306        PC: 37         TDS1: 17         TDS2: 10         TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [9, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 313        PC: 38         TDS1: 17         TDS2: 9          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 317        PC: 39         TDS1: 16         TDS2: 9          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 323        PC: 40         TDS1: 6          TDS2: 9          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [6]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 329        PC: 41         TDS1: 108        TDS2: 9          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [108]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 333        PC: 42         TDS1: 2          TDS2: 9          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [108, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'He' << 'l'
+  DEBUG   machine:execute_pop   TICK: 340        PC: 43         TDS1: 2          TDS2: 108        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 344        PC: 44         TDS1: 16         TDS2: 108        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 349        PC: 45         TDS1: 16         TDS2: 108        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 355        PC: 46         TDS1: 6          TDS2: 108        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 6]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 360        PC: 47         TDS1: 7          TDS2: 108        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 7]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 366        PC: 48         TDS1: 7          TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [7, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 373        PC: 49         TDS1: 16         TDS2: 7          TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 377        PC: 29         TDS1: 29         TDS2: 7          TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 381        PC: 30         TDS1: 17         TDS2: 7          TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 387        PC: 31         TDS1: 9          TDS2: 7          TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [9]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 391        PC: 32         TDS1: 0          TDS2: 7          TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [9, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 397        PC: 33         TDS1: 0          TDS2: 9          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [9, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 399        PC: 34         TDS1: 0          TDS2: 9          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [9, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 402        PC: 35         TDS1: 0          TDS2: 9          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [9]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 407        PC: 36         TDS1: 8          TDS2: 9          TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [8]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 411        PC: 37         TDS1: 17         TDS2: 9          TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [8, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 418        PC: 38         TDS1: 17         TDS2: 8          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 422        PC: 39         TDS1: 16         TDS2: 8          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 428        PC: 40         TDS1: 7          TDS2: 8          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [7]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 434        PC: 41         TDS1: 108        TDS2: 8          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [108]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 438        PC: 42         TDS1: 2          TDS2: 8          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [108, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hel' << 'l'
+  DEBUG   machine:execute_pop   TICK: 445        PC: 43         TDS1: 2          TDS2: 108        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 449        PC: 44         TDS1: 16         TDS2: 108        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 454        PC: 45         TDS1: 16         TDS2: 108        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 460        PC: 46         TDS1: 7          TDS2: 108        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 7]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 465        PC: 47         TDS1: 8          TDS2: 108        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 8]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 471        PC: 48         TDS1: 8          TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [8, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 478        PC: 49         TDS1: 16         TDS2: 8          TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 482        PC: 29         TDS1: 29         TDS2: 8          TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 486        PC: 30         TDS1: 17         TDS2: 8          TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 492        PC: 31         TDS1: 8          TDS2: 8          TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [8]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 496        PC: 32         TDS1: 0          TDS2: 8          TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [8, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 502        PC: 33         TDS1: 0          TDS2: 8          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [8, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 504        PC: 34         TDS1: 0          TDS2: 8          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [8, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 507        PC: 35         TDS1: 0          TDS2: 8          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [8]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 512        PC: 36         TDS1: 7          TDS2: 8          TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [7]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 516        PC: 37         TDS1: 17         TDS2: 8          TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [7, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 523        PC: 38         TDS1: 17         TDS2: 7          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 527        PC: 39         TDS1: 16         TDS2: 7          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 533        PC: 40         TDS1: 8          TDS2: 7          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [8]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 539        PC: 41         TDS1: 111        TDS2: 7          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [111]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 543        PC: 42         TDS1: 2          TDS2: 7          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [111, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hell' << 'o'
+  DEBUG   machine:execute_pop   TICK: 550        PC: 43         TDS1: 2          TDS2: 111        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 554        PC: 44         TDS1: 16         TDS2: 111        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 559        PC: 45         TDS1: 16         TDS2: 111        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 565        PC: 46         TDS1: 8          TDS2: 111        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 8]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 570        PC: 47         TDS1: 9          TDS2: 111        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 9]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 576        PC: 48         TDS1: 9          TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [9, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 583        PC: 49         TDS1: 16         TDS2: 9          TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 587        PC: 29         TDS1: 29         TDS2: 9          TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 591        PC: 30         TDS1: 17         TDS2: 9          TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 597        PC: 31         TDS1: 7          TDS2: 9          TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [7]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 601        PC: 32         TDS1: 0          TDS2: 9          TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [7, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 607        PC: 33         TDS1: 0          TDS2: 7          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [7, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 609        PC: 34         TDS1: 0          TDS2: 7          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [7, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 612        PC: 35         TDS1: 0          TDS2: 7          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [7]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 617        PC: 36         TDS1: 6          TDS2: 7          TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [6]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 621        PC: 37         TDS1: 17         TDS2: 7          TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [6, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 628        PC: 38         TDS1: 17         TDS2: 6          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 632        PC: 39         TDS1: 16         TDS2: 6          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 638        PC: 40         TDS1: 9          TDS2: 6          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [9]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 644        PC: 41         TDS1: 32         TDS2: 6          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [32]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 648        PC: 42         TDS1: 2          TDS2: 6          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [32, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hello' << ' '
+  DEBUG   machine:execute_pop   TICK: 655        PC: 43         TDS1: 2          TDS2: 32         TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 659        PC: 44         TDS1: 16         TDS2: 32         TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 664        PC: 45         TDS1: 16         TDS2: 32         TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 670        PC: 46         TDS1: 9          TDS2: 32         TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 9]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 675        PC: 47         TDS1: 10         TDS2: 32         TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 10]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 681        PC: 48         TDS1: 10         TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [10, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 688        PC: 49         TDS1: 16         TDS2: 10         TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 692        PC: 29         TDS1: 29         TDS2: 10         TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 696        PC: 30         TDS1: 17         TDS2: 10         TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 702        PC: 31         TDS1: 6          TDS2: 10         TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [6]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 706        PC: 32         TDS1: 0          TDS2: 10         TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [6, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 712        PC: 33         TDS1: 0          TDS2: 6          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [6, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 714        PC: 34         TDS1: 0          TDS2: 6          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [6, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 717        PC: 35         TDS1: 0          TDS2: 6          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [6]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 722        PC: 36         TDS1: 5          TDS2: 6          TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [5]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 726        PC: 37         TDS1: 17         TDS2: 6          TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [5, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 733        PC: 38         TDS1: 17         TDS2: 5          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 737        PC: 39         TDS1: 16         TDS2: 5          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 743        PC: 40         TDS1: 10         TDS2: 5          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [10]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 749        PC: 41         TDS1: 119        TDS2: 5          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [119]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 753        PC: 42         TDS1: 2          TDS2: 5          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [119, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hello ' << 'w'
+  DEBUG   machine:execute_pop   TICK: 760        PC: 43         TDS1: 2          TDS2: 119        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 764        PC: 44         TDS1: 16         TDS2: 119        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 769        PC: 45         TDS1: 16         TDS2: 119        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 775        PC: 46         TDS1: 10         TDS2: 119        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 10]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 780        PC: 47         TDS1: 11         TDS2: 119        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 11]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 786        PC: 48         TDS1: 11         TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [11, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 793        PC: 49         TDS1: 16         TDS2: 11         TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 797        PC: 29         TDS1: 29         TDS2: 11         TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 801        PC: 30         TDS1: 17         TDS2: 11         TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 807        PC: 31         TDS1: 5          TDS2: 11         TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [5]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 811        PC: 32         TDS1: 0          TDS2: 11         TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [5, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 817        PC: 33         TDS1: 0          TDS2: 5          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [5, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 819        PC: 34         TDS1: 0          TDS2: 5          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [5, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 822        PC: 35         TDS1: 0          TDS2: 5          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [5]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 827        PC: 36         TDS1: 4          TDS2: 5          TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [4]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 831        PC: 37         TDS1: 17         TDS2: 5          TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [4, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 838        PC: 38         TDS1: 17         TDS2: 4          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 842        PC: 39         TDS1: 16         TDS2: 4          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 848        PC: 40         TDS1: 11         TDS2: 4          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [11]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 854        PC: 41         TDS1: 111        TDS2: 4          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [111]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 858        PC: 42         TDS1: 2          TDS2: 4          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [111, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hello w' << 'o'
+  DEBUG   machine:execute_pop   TICK: 865        PC: 43         TDS1: 2          TDS2: 111        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 869        PC: 44         TDS1: 16         TDS2: 111        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 874        PC: 45         TDS1: 16         TDS2: 111        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 880        PC: 46         TDS1: 11         TDS2: 111        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 11]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 885        PC: 47         TDS1: 12         TDS2: 111        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 12]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 891        PC: 48         TDS1: 12         TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [12, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 898        PC: 49         TDS1: 16         TDS2: 12         TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 902        PC: 29         TDS1: 29         TDS2: 12         TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 906        PC: 30         TDS1: 17         TDS2: 12         TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 912        PC: 31         TDS1: 4          TDS2: 12         TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [4]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 916        PC: 32         TDS1: 0          TDS2: 12         TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [4, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 922        PC: 33         TDS1: 0          TDS2: 4          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [4, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 924        PC: 34         TDS1: 0          TDS2: 4          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [4, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 927        PC: 35         TDS1: 0          TDS2: 4          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [4]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 932        PC: 36         TDS1: 3          TDS2: 4          TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [3]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 936        PC: 37         TDS1: 17         TDS2: 4          TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [3, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 943        PC: 38         TDS1: 17         TDS2: 3          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 947        PC: 39         TDS1: 16         TDS2: 3          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 953        PC: 40         TDS1: 12         TDS2: 3          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [12]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 959        PC: 41         TDS1: 114        TDS2: 3          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [114]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 963        PC: 42         TDS1: 2          TDS2: 3          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [114, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hello wo' << 'r'
+  DEBUG   machine:execute_pop   TICK: 970        PC: 43         TDS1: 2          TDS2: 114        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 974        PC: 44         TDS1: 16         TDS2: 114        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 979        PC: 45         TDS1: 16         TDS2: 114        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 985        PC: 46         TDS1: 12         TDS2: 114        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 12]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 990        PC: 47         TDS1: 13         TDS2: 114        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 13]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 996        PC: 48         TDS1: 13         TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [13, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 1003       PC: 49         TDS1: 16         TDS2: 13         TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 1007       PC: 29         TDS1: 29         TDS2: 13         TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1011       PC: 30         TDS1: 17         TDS2: 13         TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1017       PC: 31         TDS1: 3          TDS2: 13         TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [3]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1021       PC: 32         TDS1: 0          TDS2: 13         TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [3, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 1027       PC: 33         TDS1: 0          TDS2: 3          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [3, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 1029       PC: 34         TDS1: 0          TDS2: 3          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [3, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 1032       PC: 35         TDS1: 0          TDS2: 3          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [3]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 1037       PC: 36         TDS1: 2          TDS2: 3          TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [2]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1041       PC: 37         TDS1: 17         TDS2: 3          TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [2, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 1048       PC: 38         TDS1: 17         TDS2: 2          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1052       PC: 39         TDS1: 16         TDS2: 2          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1058       PC: 40         TDS1: 13         TDS2: 2          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [13]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1064       PC: 41         TDS1: 108        TDS2: 2          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [108]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1068       PC: 42         TDS1: 2          TDS2: 2          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [108, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hello wor' << 'l'
+  DEBUG   machine:execute_pop   TICK: 1075       PC: 43         TDS1: 2          TDS2: 108        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1079       PC: 44         TDS1: 16         TDS2: 108        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 1084       PC: 45         TDS1: 16         TDS2: 108        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1090       PC: 46         TDS1: 13         TDS2: 108        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 13]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 1095       PC: 47         TDS1: 14         TDS2: 108        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 14]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 1101       PC: 48         TDS1: 14         TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [14, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 1108       PC: 49         TDS1: 16         TDS2: 14         TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 1112       PC: 29         TDS1: 29         TDS2: 14         TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1116       PC: 30         TDS1: 17         TDS2: 14         TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1122       PC: 31         TDS1: 2          TDS2: 14         TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [2]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1126       PC: 32         TDS1: 0          TDS2: 14         TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [2, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 1132       PC: 33         TDS1: 0          TDS2: 2          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [2, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 1134       PC: 34         TDS1: 0          TDS2: 2          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [2, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 1137       PC: 35         TDS1: 0          TDS2: 2          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [2]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 1142       PC: 36         TDS1: 1          TDS2: 2          TAS: 31         Z_FLAG: 0       dec
+           DATA_STACK: [1]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1146       PC: 37         TDS1: 17         TDS2: 2          TAS: 31         Z_FLAG: 0       lit 17
+           DATA_STACK: [1, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 1153       PC: 38         TDS1: 17         TDS2: 1          TAS: 38         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1157       PC: 39         TDS1: 16         TDS2: 1          TAS: 38         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1163       PC: 40         TDS1: 14         TDS2: 1          TAS: 40         Z_FLAG: 0       push
+           DATA_STACK: [14]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1169       PC: 41         TDS1: 100        TDS2: 1          TAS: 41         Z_FLAG: 0       push
+           DATA_STACK: [100]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1173       PC: 42         TDS1: 2          TDS2: 1          TAS: 41         Z_FLAG: 0       lit 2
+           DATA_STACK: [100, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hello worl' << 'd'
+  DEBUG   machine:execute_pop   TICK: 1180       PC: 43         TDS1: 2          TDS2: 100        TAS: 43         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1184       PC: 44         TDS1: 16         TDS2: 100        TAS: 43         Z_FLAG: 0       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 1189       PC: 45         TDS1: 16         TDS2: 100        TAS: 43         Z_FLAG: 0       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1195       PC: 46         TDS1: 14         TDS2: 100        TAS: 46         Z_FLAG: 0       push
+           DATA_STACK: [16, 14]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 1200       PC: 47         TDS1: 15         TDS2: 100        TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 15]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 1206       PC: 48         TDS1: 15         TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [15, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 1213       PC: 49         TDS1: 16         TDS2: 15         TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 1217       PC: 29         TDS1: 29         TDS2: 15         TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1221       PC: 30         TDS1: 17         TDS2: 15         TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1227       PC: 31         TDS1: 1          TDS2: 15         TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [1]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1231       PC: 32         TDS1: 0          TDS2: 15         TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [1, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 1237       PC: 33         TDS1: 0          TDS2: 1          TAS: 31         Z_FLAG: 0       cmp
+           DATA_STACK: [1, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 1239       PC: 34         TDS1: 0          TDS2: 1          TAS: 31         Z_FLAG: 0       jz 50
+           DATA_STACK: [1, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_drop  TICK: 1242       PC: 35         TDS1: 0          TDS2: 1          TAS: 31         Z_FLAG: 0       drop
+           DATA_STACK: [1]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 1247       PC: 36         TDS1: 0          TDS2: 1          TAS: 31         Z_FLAG: 1       dec
+           DATA_STACK: [0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1251       PC: 37         TDS1: 17         TDS2: 1          TAS: 31         Z_FLAG: 1       lit 17
+           DATA_STACK: [0, 17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 1258       PC: 38         TDS1: 17         TDS2: 0          TAS: 38         Z_FLAG: 1       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1262       PC: 39         TDS1: 16         TDS2: 0          TAS: 38         Z_FLAG: 1       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1268       PC: 40         TDS1: 15         TDS2: 0          TAS: 40         Z_FLAG: 1       push
+           DATA_STACK: [15]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1274       PC: 41         TDS1: 33         TDS2: 0          TAS: 41         Z_FLAG: 1       push
+           DATA_STACK: [33]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1278       PC: 42         TDS1: 2          TDS2: 0          TAS: 41         Z_FLAG: 1       lit 2
+           DATA_STACK: [33, 2]
+           ADDRESS_STACK: []
+  DEBUG   machine:signal_write_memory output: 'Hello world' << '!'
+  DEBUG   machine:execute_pop   TICK: 1285       PC: 43         TDS1: 2          TDS2: 33         TAS: 43         Z_FLAG: 1       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1289       PC: 44         TDS1: 16         TDS2: 33         TAS: 43         Z_FLAG: 1       lit 16
+           DATA_STACK: [16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_dup   TICK: 1294       PC: 45         TDS1: 16         TDS2: 33         TAS: 43         Z_FLAG: 1       dup
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1300       PC: 46         TDS1: 15         TDS2: 33         TAS: 46         Z_FLAG: 1       push
+           DATA_STACK: [16, 15]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_unary_alu_operation TICK: 1305       PC: 47         TDS1: 16         TDS2: 33         TAS: 46         Z_FLAG: 0       inc
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_switch TICK: 1311       PC: 48         TDS1: 16         TDS2: 16         TAS: 46         Z_FLAG: 0       switch
+           DATA_STACK: [16, 16]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_pop   TICK: 1318       PC: 49         TDS1: 16         TDS2: 16         TAS: 49         Z_FLAG: 0       pop
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jmp   TICK: 1322       PC: 29         TDS1: 29         TDS2: 16         TAS: 49         Z_FLAG: 0       jmp 29
+           DATA_STACK: []
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1326       PC: 30         TDS1: 17         TDS2: 16         TAS: 49         Z_FLAG: 0       lit 17
+           DATA_STACK: [17]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_push  TICK: 1332       PC: 31         TDS1: 0          TDS2: 16         TAS: 31         Z_FLAG: 0       push
+           DATA_STACK: [0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_lit   TICK: 1336       PC: 32         TDS1: 0          TDS2: 16         TAS: 31         Z_FLAG: 0       lit 0
+           DATA_STACK: [0, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_cmp   TICK: 1342       PC: 33         TDS1: 0          TDS2: 0          TAS: 31         Z_FLAG: 1       cmp
+           DATA_STACK: [0, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_jz    TICK: 1346       PC: 50         TDS1: 50         TDS2: 0          TAS: 31         Z_FLAG: 1       jz 50
+           DATA_STACK: [0, 0]
+           ADDRESS_STACK: []
+  DEBUG   machine:execute_halt  TICK: 1348       PC: 51         TDS1: 50         TDS2: 0          TAS: 31         Z_FLAG: 1       halt
+           DATA_STACK: [0, 0]
+           ADDRESS_STACK: []
