@@ -46,7 +46,7 @@ def translate_section_data(section_data: str):
             variables[name] = variable
             address += 1
         elif is_string(value):
-            chars = [len(value)-2]
+            chars = [len(value) - 2]
             for char in value:
                 if char == '"':
                     continue

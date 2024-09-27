@@ -496,7 +496,9 @@ class ControlUnit:
         if self.current_operand is not None:
             instruction_repr += " {}".format(self.current_operand)
 
-        return "{}       {}\n         {}\n         {}".format(registers_repr, instruction_repr, data_stack_repr, address_stack_repr)
+        return "{}       {}\n         {}\n         {}".format(
+            registers_repr, instruction_repr, data_stack_repr, address_stack_repr
+        )
 
 
 def simulation(machine_code, input_tokens):
