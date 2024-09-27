@@ -5,11 +5,11 @@ from isa import Command, Opcode, Variable, write_code
 
 
 def is_integer(value: str):
-    return value.isdigit()
+    return bool(re.fullmatch(r"^-?\d+$", value))
 
 
 def is_string(value: str):
-    return value.isalpha()
+    return bool(re.fullmatch(r"^(\".*\")|(\'.*\')$", value))
 
 
 def delete_comment(line: str):
@@ -46,8 +46,10 @@ def translate_section_data(section_data: str):
             variables[name] = variable
             address += 1
         elif is_string(value):
-            chars = [len(value)]
+            chars = [len(value)-2]
             for char in value:
+                if char == '"':
+                    continue
                 chars.append(ord(char))
             variable = Variable(name, address, chars, True)
             variables[name] = variable
@@ -80,7 +82,7 @@ def translate_section_text(section_text: str):
 
     for line in lines:
         if line.startswith("."):
-            labels[line[1:-1]] = address
+            labels[line[:-1]] = address
         else:
             commands.append(line)
             address += 1
