@@ -1,0 +1,24 @@
+  section .data:
+    length: 0
+  section .text:
+        lit in
+        push
+        lit length
+        pop
+    .loop:
+        lit length
+        push
+        lit 0
+        cmp
+        jz .stop
+        drop
+        dec
+        lit length
+        pop
+        lit in
+        push
+        lit out
+        pop
+        jmp .loop
+    .stop:
+        halt

@@ -1,0 +1,60 @@
+section .data:
+    sum: 0
+    cur_num: 1
+  section .text:
+    .loop:
+        lit 3
+        lit cur_num
+        push
+        mod
+        lit 0
+        cmp
+        jz .add
+        drop
+        drop
+        lit 5
+        lit cur_num
+        push
+        mod
+        lit 0
+        cmp
+        jz .add
+        drop
+        drop
+        lit cur_num
+        dup
+        push
+        inc
+        switch
+        pop
+        jmp .loop
+
+    .add:
+        drop
+        drop
+        lit sum
+        push
+        lit cur_num
+        push
+        add
+        dup
+        lit 1000
+        switch
+        div
+        lit 1
+        cmp
+        jz .stop
+        drop
+        drop
+        lit sum
+        pop
+        lit cur_num
+        dup
+        push
+        inc
+        switch
+        pop
+        jmp .loop
+
+    .stop:
+        halt

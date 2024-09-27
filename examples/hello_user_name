@@ -1,0 +1,110 @@
+section .data:
+    question: "What is your name?"
+    hello: "Hello"
+    length: 0
+    username: bf 20
+    pointer: question
+  section .text:
+    call .print_str
+    call .print_n
+    lit username
+    lit pointer
+    pop
+    lit in
+    push
+    dup
+    lit pointer
+    push
+    pop
+    lit length
+    pop
+    lit pointer
+    push
+    inc
+    lit pointer
+    pop
+
+    .read:
+        lit length
+        push
+        lit 0
+        cmp
+        jz .print_hello
+        drop
+        dec
+        lit length
+        pop
+        lit in
+        push
+        lit pointer
+        push
+        pop
+        lit pointer
+        push
+        inc
+        lit pointer
+        pop
+        jmp .read
+
+
+
+    .print_hello:
+        lit hello
+        lit pointer
+        pop
+        call .print_str
+        call .print_space
+        lit username
+        lit pointer
+        pop
+        call .print_str
+        halt
+
+    .print_str:
+        lit pointer
+        push
+        push
+        lit length
+        pop
+        lit pointer
+        dup
+        push
+        inc
+        switch
+        pop
+    .loop:
+        lit length
+        push
+        lit 0
+        cmp
+        jz .stop
+        drop
+        dec
+        lit length
+        pop
+        lit pointer
+        push
+        push
+        lit out
+        pop
+        lit pointer
+        dup
+        push
+        inc
+        switch
+        pop
+        jmp .loop
+        .stop:
+            ret
+
+    .print_space:
+        lit 32
+        lit out
+        pop
+        ret
+
+    .print_n:
+        lit 10
+        lit out
+        pop
+        ret

@@ -1,0 +1,40 @@
+  section .data:
+    hello: "Hello world!"
+    pointer: hello
+    length: 0
+  section .text:
+        lit pointer
+        push
+        push
+        lit length
+        pop
+        lit pointer
+        dup
+        push
+        inc
+        switch
+        pop
+    .loop:
+        lit length
+        push
+        lit 0
+        cmp
+        jz .stop
+        drop
+        dec
+        lit length
+        pop
+        lit pointer
+        push
+        push
+        lit out
+        pop
+        lit pointer
+        dup
+        push
+        inc
+        switch
+        pop
+        jmp .loop
+    .stop:
+        halt
