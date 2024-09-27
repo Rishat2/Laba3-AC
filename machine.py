@@ -20,7 +20,7 @@ def alu_mul(value1, value2):
 
 
 def alu_div(value1, value2):
-    return value1 / value2
+    return value1 // value2
 
 
 def alu_mod(value1, value2):
@@ -161,7 +161,6 @@ class DataPath:
         self.pc = value
 
     def signal_write_memory(self, address, value):
-        assert address != 1, "Address = input_address"
         if address == 2:
             char = chr(value)
             logging.debug("output: %s << %s", repr("".join(self.output_buffer)), repr(char))
@@ -173,6 +172,8 @@ class DataPath:
     def signal_read_memory(self, address):
         if address == 1:
             assert len(self.input_buffer) > 0, "Input buffer is empty"
+            if self.input_buffer[-1].isdigit():
+                return int(self.input_buffer.pop())
             char = ord(self.input_buffer.pop())
             logging.debug("input: %s", repr(chr(char)))
             return char
@@ -296,7 +297,6 @@ class ControlUnit:
 
         opcode = instruction["opcode"]
         operand = instruction["operand"]
-        print(opcode)
         self.current_instruction = opcode
         self.current_operand = operand
         if self.decode_and_execute_control_flow_instruction(opcode, operand):
@@ -412,7 +412,7 @@ class ControlUnit:
         self.tick()
 
         value2 = self.data_path.signal_read_data_stack()
-        self.data_path.signal_latch_data_stack_top1(value2)
+        self.data_path.signal_latch_data_stack_top2(value2)
         self.tick()
 
         self.data_path.alu.compute(self.data_path.data_stack_top1, self.data_path.data_stack_top2, opcode)
@@ -496,13 +496,12 @@ class ControlUnit:
         if self.current_operand is not None:
             instruction_repr += " {}".format(self.current_operand)
 
-        return "{} \t{}\n\t   {}\n\t   {}".format(registers_repr, instruction_repr, data_stack_repr, address_stack_repr)
+        return "{}       {}\n         {}\n         {}".format(registers_repr, instruction_repr, data_stack_repr, address_stack_repr)
 
 
 def simulation(machine_code, input_tokens):
     data_path = DataPath(machine_code, input_tokens)
     control_unit = ControlUnit(data_path)
-
     control_unit.initialization()
 
     instruction_counter = 0
@@ -524,7 +523,7 @@ def main(machine_code_file, input_file):
         input_tokens = []
         for i in range(len(input_text)):
             input_tokens.append(input_text[len(input_text) - i - 1])
-        input_tokens.append(len(input_text))
+        input_tokens.append(str(len(input_tokens)))
 
     output, instruction_counter, ticks = simulation(machine_code, input_tokens)
 
