@@ -1,7 +1,7 @@
 # Stack Machine. Транслятор и модель
 
 - Валиев Ришат Ильшатович, P3233
-- asm | stack | neum | hw | instr | struct | stream | mem | pstr | prob1 
+- asm | stack | neum | hw | instr | struct | stream | mem | pstr | prob1
 - Упрощенный вариант
 
 ## Язык программирования
